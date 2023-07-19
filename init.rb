@@ -1,3 +1,5 @@
+require_dependency File.expand_path('../lib/wiki_text_colorizer/hooks.rb', __FILE__)
+
 Redmine::Plugin.register :redmine_wiki_text_colorizer do
   name 'Redmine Wiki Text Colorier plugin'
   author 'sk-ys'
