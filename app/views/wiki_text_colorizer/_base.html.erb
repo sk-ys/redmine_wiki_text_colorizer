@@ -1,3 +1,22 @@
 <% content_for :header_tags do %>
+  <script>
+    //<![CDATA[
+    var WikiTextColorizer = {
+      settings: {
+        textFormatting: "<%= Setting.text_formatting %>",
+      },
+      resources: {
+        text: {
+          textColor: "<%= l(:wiki_text_colorizer_label_text_color) %>",
+          togglePaletteMoreText: "<%= l(:wiki_text_colorizer_toggle_palette_more_text) %>",
+          togglePaletteLessText: "<%= l(:wiki_text_colorizer_toggle_palette_less_text) %>",
+        },
+      }
+    }
+    //]]>
+  </script>
   <%= javascript_include_tag "wiki_text_colorizer", plugin: "redmine_wiki_text_colorizer" %>
+  <%= stylesheet_link_tag "wiki_text_colorizer", plugin: "redmine_wiki_text_colorizer" %>
+  <%= javascript_include_tag "spectrum.min", plugin: "redmine_wiki_text_colorizer" %>
+  <%= stylesheet_link_tag "spectrum.min", plugin: "redmine_wiki_text_colorizer" %>
 <% end %>

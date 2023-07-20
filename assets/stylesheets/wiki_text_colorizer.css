@@ -1,0 +1,7 @@
+button.jstb_text_color:before {
+  content: "A";
+  font-weight: bold;
+}
+button.jstb_text_color {
+  color: black;
+}

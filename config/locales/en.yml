@@ -1,3 +1,5 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
+  wiki_text_colorizer_label_text_color: Text color
+  wiki_text_colorizer_toggle_palette_more_text: More
+  wiki_text_colorizer_toggle_palette_less_text: Less
