@@ -1,5 +1,6 @@
 # Japanese strings go here for Rails i18n
 ja:
   wiki_text_colorizer_label_text_color: 文字色
+  wiki_text_colorizer_label_text_bgcolor: 文字背景色
   wiki_text_colorizer_toggle_palette_more_text: 詳細
   wiki_text_colorizer_toggle_palette_less_text: 閉じる

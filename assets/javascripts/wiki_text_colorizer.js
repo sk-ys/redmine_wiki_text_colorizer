@@ -35,12 +35,25 @@
       },
     };
 
+    const textBGColorButton = {
+      type: "button",
+      title: resources.text.textBGColor,
+      fn: {
+        wiki: function () {
+          const jstbButton = $(this.toolbar).find(".jstb_text_bgcolor")[0];
+          formatTextColor(jstbButton, null, true);
+          $(jstbButton).spectrum("destroy");
+        },
+      },
+    };
+
     const jstbElements = {};
     for (const e in jsToolBar.prototype.elements) {
       jstbElements[e] = jsToolBar.prototype.elements[e];
       if (e === "em") {
         // Insert button to apply color to text after em
         jstbElements["text_color"] = textColorButton;
+        jstbElements["text_bgcolor"] = textBGColorButton;
       }
     }
     jsToolBar.prototype.elements = jstbElements;
@@ -48,13 +61,14 @@
   addButtonsToJsToolBar();
 
   /**
-   * Format the text color of textarea with jstb button.
+   * Apply style to selected text of textarea
    * @param {*} jstbButton
-   * @param {*} color
+   * @param {*} key
+   * @param {*} value
    */
-  function formatTextColor(jstbButton, color) {
-    if (color === null) {
-      color = $(jstbButton).spectrum("get");
+  function applyStyle(jstbButton, key, value) {
+    if (value === null) {
+      value = $(jstbButton).spectrum("get");
     }
 
     const $textArea = $(jstbButton)
@@ -63,7 +77,7 @@
 
     if ($textArea.length === 0) {
       console.warn("Textarea not found.");
-      return;
+      return false;
     }
 
     const textArea = $textArea[0];
@@ -71,8 +85,7 @@
     const start = textArea.selectionStart;
     const end = textArea.selectionEnd;
     const selected = text.substring(start, end);
-    const colorString = color.toName() || color.toHexString();
-    const prefix = `<span style="color:${colorString};">`;
+    const prefix = `<span style="${key}:${value};">`;
     const suffix = "</span>";
 
     // Update textarea
@@ -83,20 +96,57 @@
       textArea.selectionStart = start + prefix.length;
     }
 
-    // Update button color
-    $(jstbButton).css("color", colorString);
-
     // Postprocessing
     $textArea.change().focus();
+
+    return true;
+  }
+
+  /**
+   * Format text color or text background color of textarea with jstb button.
+   * @param {*} jstbButton
+   * @param {*} color
+   */
+  function formatTextColor(jstbButton, color, background = false) {
+    if (color === null) {
+      color = $(jstbButton).spectrum("get");
+    }
+
+    const colorString = color.toName() || color.toHexString();
+
+    if (
+      applyStyle(
+        jstbButton,
+        (background ? "background-" : "") + "color",
+        colorString
+      )
+    ) {
+      // Update button color
+      $(`style.${$(jstbButton).attr("class")}`).text(
+        `button.${$(jstbButton).attr("class")}:before { ${
+          background ? "background-" : ""
+        }color:${colorString}; }`
+      );
+    }
   }
 
   $(() => {
+    // Add empty style tags
+    $("head")
+      .append($("<style/>").addClass("jstb_text_color"))
+      .append($("<style/>").addClass("jstb_text_bgcolor"));
+
+    // Event settings
     $(document)
-      .on("mouseover", ".jstb_text_color", function () {
+      .on("mouseover", ".jstb_text_color, .jstb_text_bgcolor", function () {
+        const color =
+          $(this).val() ||
+          ($(this).hasClass("jstb_text_bgcolor") ? "white" : "black");
+
         // When the mouse over the button, generate the palette.
         $(this)
           .spectrum({
-            color: $(this).val(),
+            color: color,
             clickoutFiresChange: false,
             togglePaletteOnly: true,
             showPaletteOnly: true,
@@ -107,12 +157,16 @@
             showInput: true,
             localStorageKey: "wiki-text-colorizer-spectrum-selection-palette",
             change: function (color) {
-              formatTextColor(this, color);
+              formatTextColor(
+                this,
+                color,
+                $(this).hasClass("jstb_text_bgcolor")
+              );
             },
           })
           .spectrum("show");
       })
-      .on("mouseleave", ".jstb_text_color", function () {
+      .on("mouseleave", ".jstb_text_color, .jstb_text_bgcolor", function () {
         // If the mouse leaves the button and the focus is somewhere other than
         // the palette, remove the palette.
         if (!$("div.sp-container:hover").length > 0) {
