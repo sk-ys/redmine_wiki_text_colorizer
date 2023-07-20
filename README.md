@@ -9,12 +9,12 @@ background color.
 ### When using git
 1. Clone this repository to your Redmine plugins directory.
     ```
-    git clone https://github.com/sk-ys/redmine_wiki_text_colorizer.git YOUR_REDMINE_DIRECTORY/plugins/    redmine_wiki_text_colorizer
+    git clone https://github.com/sk-ys/redmine_wiki_text_colorizer.git YOUR_REDMINE_DIRECTORY/plugins/redmine_wiki_text_colorizer
     ```
 2. Restart Redmine.
 
 ### When not using git
-1. Download zip file ( [redmine_wiki_text_colorizer-main.zip](https://github.com/sk-ys/redmine_wiki_text_colorizer/archive/refs/heads/main.zip) ).
+1. Download zip file from the [release page](https://github.com/sk-ys/redmine_wiki_text_colorizer/releases) or the [latest main repository](https://github.com/sk-ys/redmine_wiki_text_colorizer/archive/refs/heads/main.zip). 
 2. Extract the ZIP file to your Redmine plugin directory. The name of the unzipped directory must be `redmine_wiki_text_colorizer`.
 3. Restart Redmine.
 
@@ -23,19 +23,19 @@ background color.
 1. Select text to format  
 ![](doc/images/selected_text.png)
 
-2. By opening the color palette and selecting a color, HTML tags will be
+2. By opening the color palette and selecting a color, HTML tag will be
 inserted ( Images-2 ).  
 ![](doc/images/text_color_palette_open.png)
 
 ### Images
-1. Sample text before editing  
-![](doc/images/sample_text_before_editing.png)
+1. Sample text before formatting  
+![](doc/images/sample_text_before_formatting.png)
 
-2. Sample text after editing  
-![](doc/images/sample_text_after_editing.png)  
+2. Sample text after formatting  
+![](doc/images/sample_text_after_formatting.png)  
  ( Background color has been applied as well as text color. )
 
-3. Preview of sample text after editing  
+3. Preview of sample text after formatting  
 ![](doc/images/sample_text_preview.png)
 
 
