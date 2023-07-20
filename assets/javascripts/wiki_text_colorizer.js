@@ -50,8 +50,8 @@
     const jstbElements = {};
     for (const e in jsToolBar.prototype.elements) {
       jstbElements[e] = jsToolBar.prototype.elements[e];
-      if (e === "em") {
-        // Insert button to apply color to text after em
+      if (e === "del") {
+        // Insert button to apply color to text after del
         jstbElements["text_color"] = textColorButton;
         jstbElements["text_bgcolor"] = textBGColorButton;
       }
