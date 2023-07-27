@@ -24,7 +24,7 @@
    */
   function addButtonsToJsToolBar() {
     const textColorButton = {
-      type: "button",
+      type: "text_color_button",
       title: resources.text.textColor,
       fn: {
         wiki: function () {
@@ -36,7 +36,7 @@
     };
 
     const textBGColorButton = {
-      type: "button",
+      type: "text_color_button",
       title: resources.text.textBGColor,
       fn: {
         wiki: function () {
@@ -57,6 +57,27 @@
       }
     }
     jsToolBar.prototype.elements = jstbElements;
+
+    jsToolBar.prototype.text_color_button = function (toolName) {
+      const b = jsToolBar.prototype.button(toolName);
+      const bDrawOrg = b.draw;
+      b.draw = () => {
+        const button = bDrawOrg.call(b);
+        if (toolName === "text_color") {
+          $(button).append($("<span/>").addClass("label").text("A"));
+        } else {
+          $(button).append(
+            $("<div/>")
+              .addClass("label-box")
+              .append($("<span/>").addClass("label").text("A"))
+          );
+        }
+        return button;
+      };
+      return b;
+    };
+
+    jsToolBar.prototype.text_bgcolor_button = function (toolName) {};
   }
   addButtonsToJsToolBar();
 
@@ -121,12 +142,16 @@
         colorString
       )
     ) {
-      // Update button color
-      $(`style.${$(jstbButton).attr("class")}`).text(
-        `button.${$(jstbButton).attr("class")}:before { ${
-          background ? "background-" : ""
-        }color:${colorString}; }`
-      );
+      if (background) {
+        $(jstbButton)
+          .children("div.label-box")
+          .css({
+            backgroundColor: colorString,
+            color: color.isDark() ? "#EEE" : "#111",
+          });
+      } else {
+        $(jstbButton).children("span.label").css("color", colorString);
+      }
     }
   }
 
