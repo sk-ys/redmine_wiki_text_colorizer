@@ -1,8 +1,8 @@
 # Redmine wiki text colorizer
 
 This is the plugin for Redmine.  
-This plugin adds two buttons to jsToolBar  to apply HTML tags for text color and
-background color.  
+This plugin adds two buttons to jsToolBar to output HTML tags for changing the 
+text color and background color. 
 ![Alt text](doc/images/buttons.png)
 
 ## Installation
