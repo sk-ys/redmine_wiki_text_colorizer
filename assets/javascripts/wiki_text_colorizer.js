@@ -76,8 +76,6 @@
       };
       return b;
     };
-
-    jsToolBar.prototype.text_bgcolor_button = function (toolName) {};
   }
   addButtonsToJsToolBar();
 
