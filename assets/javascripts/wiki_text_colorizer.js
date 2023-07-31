@@ -59,7 +59,7 @@
     jsToolBar.prototype.elements = jstbElements;
 
     jsToolBar.prototype.text_color_button = function (toolName) {
-      const b = jsToolBar.prototype.button(toolName);
+      const b = jsToolBar.prototype.button.call(this, toolName);
       const bDrawOrg = b.draw;
       b.draw = () => {
         const button = bDrawOrg.call(b);
@@ -76,8 +76,6 @@
       };
       return b;
     };
-
-    jsToolBar.prototype.text_bgcolor_button = function (toolName) {};
   }
   addButtonsToJsToolBar();
 
