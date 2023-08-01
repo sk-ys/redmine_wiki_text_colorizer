@@ -140,6 +140,9 @@
         colorString
       )
     ) {
+      // Backup color string to button
+      $(jstbButton).data("color", colorString);
+
       if (background) {
         $(jstbButton)
           .children("div.label-box")
@@ -163,8 +166,12 @@
     $(document)
       .on("mouseover", ".jstb_text_color, .jstb_text_bgcolor", function () {
         const color =
+          $(this).data("color") ||
           $(this).val() ||
           ($(this).hasClass("jstb_text_bgcolor") ? "white" : "black");
+          // TODO:
+          //   `$(this).val()` is overwritten at an unintended time from
+          //   spectrum.js.
 
         // When the mouse over the button, generate the palette.
         $(this)
