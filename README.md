@@ -20,11 +20,10 @@ text color and background color.
 
 
 ## Usage
-1. Select text to format  
+1. Select the text you want to format.  
 ![](doc/images/selected_text.png)
 
-2. By opening the color palette and selecting a color, HTML tag will be
-inserted ( Images-2 ).  
+2. Open the color palette and select a color. This will insert an HTML tag.  
 ![](doc/images/text_color_palette_open.png)
 
 ### Images
