@@ -104,7 +104,7 @@
     const start = textArea.selectionStart;
     const end = textArea.selectionEnd;
     const selected = text.substring(start, end);
-    const prefix = `<span style="${key}:${value};">`;
+    const prefix = `<span style=${key}:${value};>`;
     const suffix = "</span>";
 
     // Update textarea
