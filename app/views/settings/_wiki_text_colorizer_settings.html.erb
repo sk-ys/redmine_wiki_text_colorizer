@@ -1,0 +1,6 @@
+<% isTextile = Setting.text_formatting == "textile" %>
+<p class="">
+  <label for="textile_css_output">Use Textile CSS output:</label>
+  <input type="hidden" name="settings[textile_css_output]" value="<%= isTextile ? '0' : @settings[:textile_css_output] %>">
+  <%= check_box_tag 'settings[textile_css_output]', '1', @settings[:textile_css_output] == '1', {disabled: !isTextile} %>
+</p>
