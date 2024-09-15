@@ -4,10 +4,6 @@
   const textFormatting = WikiTextColorizer["settings"]["textFormatting"];
   const textileCssOutput = WikiTextColorizer["settings"]["textileCssOutput"];
   const supportedTextFormatting = ["textile", "markdown", "common_mark"];
-  // Caution:
-  //   If you are using "textile" or "markdown", you will need to manually
-  //   update the source code to support html SPAN tag in the wiki.
-  //   Reference(Japanese): https://redmine.jp/faq/wiki/use-html-tag-in-wiki/
 
   if (!supportedTextFormatting.includes(textFormatting)) {
     // Unsupported text format
