@@ -18,6 +18,13 @@ text color and background color.
 2. Extract the ZIP file to your Redmine plugin directory. The name of the unzipped directory must be `redmine_wiki_text_colorizer`.
 3. Restart Redmine.
 
+## Uninstallation
+1. Navigate to your Redmine plugin directory.
+2. Delete the directory for this plugin.
+   ```
+   rm -r redmine_wiki_text_colorizer
+   ```
+3. Restart Redmine.
 
 ## Usage
 1. Select the text you want to format.  
