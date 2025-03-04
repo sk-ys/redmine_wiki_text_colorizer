@@ -4,6 +4,7 @@
     var WikiTextColorizer = {
       settings: {
         textFormatting: "<%= Setting.text_formatting %>",
+        textileCssOutput: <%= Setting.plugin_redmine_wiki_text_colorizer[:textile_css_output] == '1' %>,
       },
       resources: {
         text: {

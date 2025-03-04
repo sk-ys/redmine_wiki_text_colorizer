@@ -1,17 +1,11 @@
 (() => {
   if (typeof jsToolBar === "undefined") return;
 
+  const textFormatting = WikiTextColorizer["settings"]["textFormatting"];
+  const textileCssOutput = WikiTextColorizer["settings"]["textileCssOutput"];
   const supportedTextFormatting = ["textile", "markdown", "common_mark"];
-  // Caution:
-  //   If you are using "textile" or "markdown", you will need to manually
-  //   update the source code to support html SPAN tag in the wiki.
-  //   Reference(Japanese): https://redmine.jp/faq/wiki/use-html-tag-in-wiki/
 
-  if (
-    !supportedTextFormatting.includes(
-      WikiTextColorizer["settings"]["textFormatting"]
-    )
-  ) {
+  if (!supportedTextFormatting.includes(textFormatting)) {
     // Unsupported text format
     return;
   }
@@ -104,8 +98,12 @@
     const start = textArea.selectionStart;
     const end = textArea.selectionEnd;
     const selected = text.substring(start, end);
-    const prefix = `<span style="${key}:${value};">`;
-    const suffix = "</span>";
+    const prefix =
+      textFormatting === "textile" && textileCssOutput
+        ? `%{${key}:${value}}`
+        : `<span style=${key}:${value};>`;
+    const suffix =
+      textFormatting === "textile" && textileCssOutput ? "%" : "</span>";
 
     // Update textarea
     textArea.setRangeText(prefix + selected + suffix);
@@ -169,9 +167,9 @@
           $(this).data("color") ||
           $(this).val() ||
           ($(this).hasClass("jstb_text_bgcolor") ? "white" : "black");
-          // TODO:
-          //   `$(this).val()` is overwritten at an unintended time from
-          //   spectrum.js.
+        // TODO:
+        //   `$(this).val()` is overwritten at an unintended time from
+        //   spectrum.js.
 
         // When the mouse over the button, generate the palette.
         $(this)
